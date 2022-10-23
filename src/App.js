@@ -6,9 +6,11 @@ import {ChakraProvider} from '@chakra-ui/react'
 function App() {
   return (
     <div className="App">
-      <ChakraProvider>
-        <TodoList />
-      </ChakraProvider>
+      <div className='wrapper'>
+        <ChakraProvider>
+          <TodoList />
+        </ChakraProvider>
+      </div>
     </div>
   );
 }

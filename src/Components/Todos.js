@@ -1,24 +1,24 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { useTodosContext } from '../Contexts/TodosContext'
 import { Checkbox } from '@chakra-ui/react'
 
-const Todos = () => {
+const Todos = ({
+  setTodo,
+  isUpdateClicked,
+  setIsUpdateClicked,
+  setTodoId}) => {
   const {todos, setTodos} = useTodosContext()
-
-
   const completeTask = (id) => {
-    setTodos(
-      todos.map(
-        (todo, key) => {
-          if(key === id) 
-          return {
-            ...todo,
-            complete: !todo.complete
-          }
-          else return todo
-        }
-      )
+    const newTodos = todos.map(
+      (todo, key) => {
+        return key === id ?  
+        {
+          ...todo,
+          complete: !todo.complete
+        } : todo
+      }
     )
+    setTodos(newTodos)
   }
 
   const deleteTodo = id => setTodos(
@@ -38,7 +38,14 @@ const Todos = () => {
           <span 
           className='todo'
           style={{textDecoration: complete && "line-through"}}>{todo}</span>
-          <button onClick={() => deleteTodo(id)}>Delete</button>
+          <div className="buttons">
+            <button onClick={() => deleteTodo(id)}>Delete</button>
+            <button onClick={() => {
+              setTodo(todo)
+              setIsUpdateClicked(!isUpdateClicked)
+              setTodoId(id)
+            }}>Update</button>
+          </div>
         </div>
       })}
     </div>

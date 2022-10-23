@@ -6,18 +6,18 @@
         box-sizing: border-box;
     }
     
-    .App {
+    .wrapper {
         display: flex;
-        height: 100vh;
+        min-height: 100vh;
         justify-content: center;
         align-items: center;
         background-color: rgb(72, 118, 245);
+        padding: 4rem;
     }
     
     .todo-list {
         background-color: rgb(226, 224, 236);
-        width: 30rem;
-        word-break: break-all;
+        min-width: 30rem;
         padding: 2rem;
     }
     
@@ -25,6 +25,7 @@
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
+        position: relative;
     }
     
     .todo-list label {
@@ -73,10 +74,19 @@
         flex-wrap: wrap;
     }
     
-    .todos button {
+    .buttons button:nth-child(1) {
         padding: 0.2rem 0.89em;
         background: rgb(248, 161, 161);
         border-radius: 1rem;
         cursor: pointer;
         border: none;
+    }
+    
+    .buttons button:nth-child(2) {
+        padding: 0.2rem 0.89em;
+        background: rgb(136, 209, 127);
+        border-radius: 1rem;
+        cursor: pointer;
+        border: none;
+        margin-left: 10px;
     }
