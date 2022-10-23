@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import { useTodosContext } from '../Contexts/TodosContext'
 import { Checkbox } from '@chakra-ui/react'
+import { memo } from 'react'
 
 const Todos = ({
   setTodo,
@@ -30,7 +31,7 @@ const Todos = ({
   return (
     <div className='todos'>
       {todos.map(({todo, complete}, id) => {
-        return <div className='todo-container'>
+        return <div key={id} className='todo-container'>
           <Checkbox 
             border='gray' 
             size='lg' 

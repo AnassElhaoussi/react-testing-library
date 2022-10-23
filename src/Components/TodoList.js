@@ -16,7 +16,9 @@ export const TodoList = () => {
             complete: false
         }])
         setTodo('')
+        setIsUpdateClicked(false)
     }
+
 
     const saveUpdatedTodo = () => {
         const updated = todos.map((task, id) => {
@@ -52,10 +54,10 @@ export const TodoList = () => {
                 </button>
             </div>
             <Todos 
-            setTodo={setTodo} 
-            isUpdateClicked={isUpdateClicked} 
-            setIsUpdateClicked={setIsUpdateClicked}
-            setTodoId={setTodoId} />
+                setTodo={setTodo} 
+                isUpdateClicked={isUpdateClicked} 
+                setIsUpdateClicked={setIsUpdateClicked}
+                setTodoId={setTodoId} />
         </div>
     </div>
         
