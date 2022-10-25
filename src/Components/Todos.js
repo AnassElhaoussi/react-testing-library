@@ -7,7 +7,8 @@ const Todos = ({
   setTodo,
   isUpdateClicked,
   setIsUpdateClicked,
-  setTodoId}) => {
+  setTodoId,
+  scroll}) => {
   const {todos, setTodos} = useTodosContext()
   const completeTask = (id) => {
     const newTodos = todos.map(
@@ -45,6 +46,7 @@ const Todos = ({
               setTodo(todo)
               setIsUpdateClicked(!isUpdateClicked)
               setTodoId(id)
+              scroll.current.scrollIntoView({behavior: 'smooth'})
             }}>Update</button>
           </div>
         </div>
