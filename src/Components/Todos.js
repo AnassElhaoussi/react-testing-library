@@ -33,10 +33,12 @@ const Todos = ({
     <div className='todos'>
       {todos.map(({todo, complete}, id) => {
         return <div key={id} className='todo-container'>
+          { !complete && 
           <Checkbox 
-            border='gray' 
-            size='lg' 
-            onChange={() => completeTask(id)} />
+          border='gray' 
+          size='lg' 
+          onChange={() => completeTask(id)} />
+           }
           <span 
           className='todo'
           style={{textDecoration: complete && "line-through"}}>{todo}</span>

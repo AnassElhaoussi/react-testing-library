@@ -1,7 +1,7 @@
-import React, {useEffect, useState, useRef} from 'react'
+import React, {useState, useRef} from 'react'
 import { useTodosContext } from '../Contexts/TodosContext'
-import Followers from './Followers'
 import Todos from './Todos'
+import {Link} from 'react-router-dom'
 
 export const TodoList = () => {
     const {todos, setTodos} = useTodosContext()
@@ -9,7 +9,6 @@ export const TodoList = () => {
     const [isUpdateClicked, setIsUpdateClicked] = useState(false)
     const [todoId, setTodoId] = useState(null)
     const scroll = useRef()
-    const [followersShown, setFollowersShown] = useState(false)
 
     const addTodo = (e) => {
         e.preventDefault()
@@ -21,7 +20,6 @@ export const TodoList = () => {
         setTodo('')
         setIsUpdateClicked(false)
     }
-
 
     const saveUpdatedTodo = () => {
         const updated = todos.map((task, id) => {
@@ -36,8 +34,7 @@ export const TodoList = () => {
         setTodo('')
     }
 
-
-    const todoList = <div className='todo-list'>
+    return <div className='todo-list'>
     <form className='header' onSubmit={addTodo}>
         <label className='heading-1'>Add a new todo</label>
         <input type="text" 
@@ -46,7 +43,7 @@ export const TodoList = () => {
             onChange={event => setTodo(event.target.value)}
             ref={scroll}
         />
-        <span 
+        <span
         className='save' 
         style={{cursor: 'pointer'}}
         onClick={saveUpdatedTodo}
@@ -67,16 +64,11 @@ export const TodoList = () => {
             scroll={scroll}
             />
     </div> 
-        <span onClick={() => setFollowersShown(true)}>
+    <Link to='/followers'>
+        <span>
             Browse your followers
         </span>
-</div>
-
-if(followersShown) {
-    return <h1 onClick={() => setFollowersShown(false)}>See your followers</h1>
-} else {
-    return todoList
-}
-        
+    </Link>
+</div>   
              
 }
