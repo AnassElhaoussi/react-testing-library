@@ -1,5 +1,5 @@
-import React,{useState} from 'react'
-import { useTodosContext } from '../Contexts/TodosContext'
+import React,{useState, useRef} from 'react'
+import { useTodosContext } from '../../Contexts/TodosContext'
 import { Checkbox } from '@chakra-ui/react'
 import { memo } from 'react'
 
@@ -8,8 +8,10 @@ const Todos = ({
   isUpdateClicked,
   setIsUpdateClicked,
   setTodoId,
-  scroll}) => {
+  scroll,
+  leftTodos}) => {
   const {todos, setTodos} = useTodosContext()
+
   const completeTask = (id) => {
     const newTodos = todos.map(
       (todo, key) => {
@@ -21,13 +23,13 @@ const Todos = ({
       }
     )
     setTodos(newTodos)
+    leftTodos.current--
   }
 
-  const deleteTodo = id => setTodos(
-    todos.filter(
-      (todo, key) => key !== id
-    )
-  ) 
+  const deleteTodo = id => {
+    setTodos(todos.filter((todo, key) => key !== id)) 
+    leftTodos.current--
+  }
 
   return (
     <div className='todos'>

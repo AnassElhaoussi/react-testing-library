@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css';
-import { TodoList } from './Components/TodoList';
-import Followers from './Components/Followers';
+import { TodoList } from './Components/TodoList/TodoList';
+import Followers from './Components/Followers/Followers';
 import {ChakraProvider} from '@chakra-ui/react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 

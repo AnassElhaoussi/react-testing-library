@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { Avatar } from '@chakra-ui/react';
+import Heading from '../Heading/Heading';
 
 const url = 'https://randomuser.me/api/?results=8'
 
@@ -25,6 +26,7 @@ const Followers = () => {
 
     return (
         <div className='followers-container'>
+            <Heading title='Followers' />
             <div className='followers'>
                 {randomFollowers.map(({name, picture}) => {
                     return (

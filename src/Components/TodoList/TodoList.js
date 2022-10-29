@@ -1,7 +1,9 @@
 import React, {useState, useRef} from 'react'
-import { useTodosContext } from '../Contexts/TodosContext'
-import Todos from './Todos'
+import { useTodosContext } from '../../Contexts/TodosContext'
+import Todos from '../Todos/Todos'
 import {Link} from 'react-router-dom'
+import Heading from '../Heading/Heading'
+import TodosCounter from '../TodosCounter/TodoCounter'
 
 export const TodoList = () => {
     const {todos, setTodos} = useTodosContext()
@@ -9,6 +11,7 @@ export const TodoList = () => {
     const [isUpdateClicked, setIsUpdateClicked] = useState(false)
     const [todoId, setTodoId] = useState(null)
     const scroll = useRef()
+    const leftTodos = useRef(todos.length)
 
     const addTodo = (e) => {
         e.preventDefault()
@@ -19,6 +22,7 @@ export const TodoList = () => {
         }])
         setTodo('')
         setIsUpdateClicked(false)
+        leftTodos.current++
     }
 
     const saveUpdatedTodo = () => {
@@ -36,7 +40,10 @@ export const TodoList = () => {
 
     return <div className='todo-list'>
     <form className='header' onSubmit={addTodo}>
-        <label className='heading-1'>Add a new todo</label>
+        <div style={{display: 'flex', justifyContent: "space-between"}}>
+            <Heading title='Add a new todo' />
+            <TodosCounter leftTodos={leftTodos} />
+        </div>
         <input type="text" 
             placeholder='Enter a task..'
             value={todo}
@@ -52,7 +59,10 @@ export const TodoList = () => {
     <div className='todos-container'>
         <div style={{display: 'flex', justifyContent: 'space-between'}}>
             <h4>Your current todos :</h4>
-            <button onClick={() => setTodos([])}>
+            <button onClick={() => {
+                setTodos([])
+                leftTodos.current = 0
+            }}>
                 Clear
             </button>
         </div>
@@ -62,6 +72,7 @@ export const TodoList = () => {
             setIsUpdateClicked={setIsUpdateClicked}
             setTodoId={setTodoId}
             scroll={scroll}
+            leftTodos={leftTodos}
             />
     </div> 
     <Link to='/followers'>
