@@ -1,7 +1,6 @@
 import React, {useState, useRef} from 'react'
 import { useTodosContext } from '../../Contexts/TodosContext'
 import Todos from '../Todos/Todos'
-import {Link} from 'react-router-dom'
 import Heading from '../Heading/Heading'
 import TodosCounter from '../TodosCounter/TodoCounter'
 
@@ -11,7 +10,7 @@ export const TodoList = () => {
     const [isUpdateClicked, setIsUpdateClicked] = useState(false)
     const [todoId, setTodoId] = useState(null)
     const scroll = useRef()
-    const leftTodos = useRef(todos.length)
+    const incompleteTodos = useRef(todos.length)
 
     const addTodo = (e) => {
         e.preventDefault()
@@ -22,7 +21,7 @@ export const TodoList = () => {
         }])
         setTodo('')
         setIsUpdateClicked(false)
-        leftTodos.current++
+        incompleteTodos.current++
     }
 
     const saveUpdatedTodo = () => {
@@ -42,7 +41,6 @@ export const TodoList = () => {
     <form className='header' onSubmit={addTodo}>
         <div style={{display: 'flex', justifyContent: "space-between"}}>
             <Heading title='Add a new todo' />
-            <TodosCounter leftTodos={leftTodos} />
         </div>
         <input type="text" 
             placeholder='Enter a task..'
@@ -61,7 +59,7 @@ export const TodoList = () => {
             <h4>Your current todos :</h4>
             <button onClick={() => {
                 setTodos([])
-                leftTodos.current = 0
+                incompleteTodos.current = 0
             }}>
                 Clear
             </button>
@@ -72,14 +70,10 @@ export const TodoList = () => {
             setIsUpdateClicked={setIsUpdateClicked}
             setTodoId={setTodoId}
             scroll={scroll}
-            leftTodos={leftTodos}
+            incompleteTodos={incompleteTodos}
             />
     </div> 
-    <Link to='/followers'>
-        <span>
-            Browse your followers
-        </span>
-    </Link>
+    <TodosCounter incompleteTodos={incompleteTodos} />
 </div>   
              
 }

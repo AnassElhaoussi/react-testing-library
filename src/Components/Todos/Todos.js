@@ -9,7 +9,7 @@ const Todos = ({
   setIsUpdateClicked,
   setTodoId,
   scroll,
-  leftTodos}) => {
+  incompleteTodos}) => {
   const {todos, setTodos} = useTodosContext()
 
   const completeTask = (id) => {
@@ -23,12 +23,12 @@ const Todos = ({
       }
     )
     setTodos(newTodos)
-    leftTodos.current--
+    incompleteTodos.current--
   }
 
   const deleteTodo = id => {
     setTodos(todos.filter((todo, key) => key !== id)) 
-    leftTodos.current--
+    incompleteTodos.current--
   }
 
   return (
